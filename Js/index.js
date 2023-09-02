@@ -8,7 +8,6 @@ const handleCategory = async () => {
   const tabContainer = document.getElementById("tab-container");
 
   data.data.forEach((category) => {
-    // console.log(category);
     const div = document.createElement("div");
     div.innerHTML = `
         <a onclick= 'handleLoadNews(${category.category_id})' class="tab tab-active">${category.category}</a> 
@@ -17,7 +16,6 @@ const handleCategory = async () => {
   });
 };
 
-// hours part
 // function secondsToHoursAndMinutes(seconds) {
 //     let minutes = Math.floor(seconds / 60);
 //     let hours = Math.floor(minutes / 60);
@@ -35,14 +33,11 @@ const handleCategory = async () => {
 //   console.log(`${timeObject.hours} hours, ${timeObject.minutes} minutes age`);
 
 const handleLoadNews = async (categoryId) => {
-  //   console.log(categoryId);
   const response = await fetch(
     `https://openapi.programming-hero.com/api/videos/category/${categoryId}`
   );
 
   const data = await response.json();
-  //   console.log(data);
-
   const cardContainer = document.getElementById("card-container");
   const statusContainer = document.getElementById("status-container");
   cardContainer.innerHTML = "";
@@ -53,8 +48,6 @@ const handleLoadNews = async (categoryId) => {
       return b - a;
     });
     videoData.forEach((data) => {
-        // console.log(data.others.posted_date);
-
       const div = document.createElement("div");
       div.innerHTML = `
             <div class="card w-96 bg-base-100 shadow-xl">
@@ -63,7 +56,9 @@ const handleLoadNews = async (categoryId) => {
               <img
                 src=${data.thumbnail}
               />
-              <p class='bg-black-200 '>${data.others.posted_date? data.others.posted_date : "a few"} seconds ago</p>
+              <p class='bg-black-200 '>${
+                data.others.posted_date ? data.others.posted_date : "a few"
+              } seconds ago</p>
               </div>
             </figure>
             <div class="">
@@ -115,7 +110,7 @@ const handleLoadNews = async (categoryId) => {
     </div>
     `;
     statusContainer.appendChild(div);
-    return
+    return;
   }
 };
 
